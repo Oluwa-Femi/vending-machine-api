@@ -9,6 +9,9 @@ Design a fully functional REST API for a vending machine, allowing users with a 
 ## Repository Link
 - `https://github.com/Oluwa-Femi/vending-machine-api`
 
+## Architecture Document
+- `https://docs.google.com/document/d/11A7MFC8NlnE9goqhk7Qq3Grl3DyQTwWV3DnNycKWoZ8/edit`
+
 ## Technology
 
 
@@ -43,9 +46,9 @@ Swagger -
 - [ ] Write tests
 
 ## Stretch Goals
-- [ ] Security
-- [ ] Encryption/Decryption
+- [ ] Security - Encryption/Decryption - x-request-from
 - [ ] Set up an audit trail system with logger
 - [ ] If somebody is already logged in with the same credentials, the user should be given a message "There is already an active session using your account". In this case the user should be able to terminate all the active sessions on their account via an endpoint i.e. /logout/all
+- [ ] Push notifications with socket
 
 

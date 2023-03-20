@@ -4,7 +4,7 @@
   "description": "Design a fully functional REST API for a vending machine",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only index.ts",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
