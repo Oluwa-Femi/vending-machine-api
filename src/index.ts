@@ -1,7 +1,11 @@
 import express from "express";
+import config from "config";
+
+const port = config.get<number>("port");
 
 const app = express();
 
-app.listen(7000, () => {
-    console.log(`REST API on 7000`);
-})
+app.listen(port, async () => {
+    console.log(`REST API on http://localhost:${port}`);
+
+});
