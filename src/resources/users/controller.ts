@@ -13,17 +13,13 @@ export async function createUserHandler(
       const user = await createUser(req.body);
       const _ = omit(user, ["password", "_id", "__v"]);
       return res.send(_);
-    // } catch (e: any) {
-    //   logger.error(e);
-    //   return res.status(400).send(new JsonError(e.message));
-    // }
   }catch (error: any) {
     console.log(error);
     return handleResponse(
       req,
       res,
-      { status: "error", message: Messages.STATUS500 },
-      500
+      { status: "error", message: Messages.STATUS400 },
+      400
     );
   }
 }

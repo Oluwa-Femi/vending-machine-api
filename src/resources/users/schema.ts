@@ -1,8 +1,8 @@
-import { object, string, TypeOf } from "zod";
+import { object, string, TypeOf, z, number } from "zod";
 
 export const createUserSchema = object({
   body: object({
-    name: string({
+    username: string({
       required_error: "Name is required",
     }),
     password: string({
@@ -11,9 +11,7 @@ export const createUserSchema = object({
     passwordConfirmation: string({
       required_error: "Password confirmation is required",
     }),
-    email: string({
-      required_error: "Email is required",
-    }).email("Not a valid email"),
+    role: z.enum(["buyer", "seller"]),
   }).refine((data) => data.password === data.passwordConfirmation, {
     message: "Passwords do not match",
     path: ["passwordConfirmation"],
