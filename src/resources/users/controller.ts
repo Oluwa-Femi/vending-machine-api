@@ -5,7 +5,7 @@ import { omit } from "lodash";
 import handleResponse from "../../helpers/response";
 import { Messages } from "../../helpers/types/enum";
 
-export async function createUserHandler(
+export async function createUserController(
     req: Request<{}, {}, CreateUserInput["body"]>,
     res: Response
   ) {
@@ -24,7 +24,7 @@ export async function createUserHandler(
   }
 }
 
-  export async function getUserHandler(
+  export async function getUserController(
     _: Request,
     res: Response
   ) {

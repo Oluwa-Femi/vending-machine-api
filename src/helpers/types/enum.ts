@@ -3,7 +3,11 @@ export enum RequestType {
 }
 
 export enum Messages {
-    STATUS400 = "Generic Error: Forbidden",
+    GENERIC = "Generic Error: Forbidden",
+    STATUS400 = "",
+    NOTFOUND = "Invalid Username or Password",
+    LOGGEDOUT = "User is Logged Out",
+    DUPLICATEDSESSION = "You have an active session. Please logout your account",
     STATUS500 = "An error occured. Please try again or contact support",
     SESSIONEXPIRED = "Unauthorized. Session timeout",
     INVALIDTOKEN = "An error occurred. Invalid token format",
