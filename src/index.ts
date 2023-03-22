@@ -4,6 +4,7 @@ import cors from "cors"
 import connect from "./utils/connect";
 import logger from "./utils/logger";
 import appRoutes from "./routes";
+import { startMetricsServer } from "./helpers/timer"
 
 const port = config.get<number>("port");
 
@@ -30,4 +31,5 @@ app.use("*", (_req: Request, res: Response) => {
 app.listen(port, async () => {
   logger.info(`REST API on http://localhost:${port}`);
   await connect();
+  startMetricsServer();
 });

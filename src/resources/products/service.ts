@@ -3,14 +3,14 @@ import ProductModel, {
   ProductDocument,
   ProductInput,
 } from "./model";
-
+import { dbResponseTime } from "../../helpers/timer";
 
 export async function createProduct(input: ProductInput) {
   const metricsLabels = {
     operation: "createProduct",
   };
 
-  const timer = databaseResponseTimeHistogram.startTimer();
+  const timer = dbResponseTime.startTimer();
   try {
     const result = await ProductModel.create(input);
     timer({ ...metricsLabels, success: "true" });
@@ -29,7 +29,7 @@ export async function findProduct(
     operation: "findProduct",
   };
 
-  const timer = databaseResponseTimeHistogram.startTimer();
+  const timer = dbResponseTime.startTimer();
   try {
     const result = await ProductModel.findOne(query, {}, options);
     timer({ ...metricsLabels, success: "true" });
