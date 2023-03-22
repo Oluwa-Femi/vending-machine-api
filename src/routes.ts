@@ -1,9 +1,9 @@
 import express from "express";
-import { userRoutes } from "./resources/"
+import { userRoutes, sessionRoutes } from "./resources/"
 
 const app = express();
 
 app.use("/users", userRoutes);
-// app.use("/products", ProductRoutes);
+app.use("/sessions", sessionRoutes);
 
 export default app;
