@@ -2,14 +2,14 @@ import { Request, Response, NextFunction } from "express";
 import handleResponse from "../../helpers/response";
 import { Messages } from "../../helpers/types/enum";
 
-const isUser = (req: Request, res: Response, next: NextFunction) => {
+export const isUser = (req: Request, res: Response, next: NextFunction) => {
   const user = res.locals.user;
 
   if (!user) {
     return handleResponse(
         req,
         res,
-        { status: "error", message: Messages.SESSIONEXPIRED },
+        { status: "error", message: Messages.NOTUSER },
         400
       );
   }
@@ -17,4 +17,46 @@ const isUser = (req: Request, res: Response, next: NextFunction) => {
   return next();
 };
 
-export default isUser;
+export const isBuyer = (req: Request, res: Response, next: NextFunction) => {
+  const user = res.locals.user;
+
+  if (!user) {
+    return handleResponse(
+      req,
+      res,
+      { status: "error", message: Messages.SESSIONEXPIRED },
+      400
+    );
+  }
+  else if (user.role !== "buyer") {
+    return handleResponse(
+      req,
+      res,
+      { status: "error", message: Messages.NOTBUYER },
+      400
+    );
+  }
+  return next();
+};
+
+export const isSeller = (req: Request, res: Response, next: NextFunction) => {
+  const user = res.locals.user;
+
+  if (!user) {
+    return handleResponse(
+      req,
+      res,
+      { status: "error", message: Messages.SESSIONEXPIRED },
+      400
+    );
+  }
+  else if (user.role !== "seller") {
+    return handleResponse(
+      req,
+      res,
+      { status: "error", message: Messages.NOTSELLER },
+      400
+    );
+  }
+  return next();
+};

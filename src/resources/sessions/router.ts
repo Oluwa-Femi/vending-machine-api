@@ -2,7 +2,7 @@ import { Router, Request, Response } from "express";
 import { createSessionController, getSessionController, deleteSessionController } from "./controller";
 import appValidator from "../../helpers/appValidator";
 import { sessionValidator } from "./schema";
-import isUser from "../users/middleware";
+import { isUser } from "../users/middleware";
 
 const router = Router();
 
