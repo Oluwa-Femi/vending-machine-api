@@ -19,31 +19,31 @@ import {
 const router = Router();
 
 router.post(
-  "/api/products",
+  "/create",
   [isUser, appValidator(createProductSchema), isSeller],
   createProductController
 );
 
 router.put(
-  "/api/products/:productId",
+  "/:productId",
   [isUser, appValidator(updateProductSchema)],
   updateProductController
 );
 
 router.get(
-  "/api/products/:productId",
+  "/:productId",
   appValidator(getProductSchema),
   getProductController
 );
 
 router.delete(
-  "/api/products/:productId",
+  "/:productId",
   [isUser, appValidator(deleteProductSchema)],
   deleteProductController
 );
 
 router.post(
-  "/api/products/:productId/buy",
+  "/:productId/buy",
   [isUser, appValidator(buyProductSchema), isBuyer],
   buyProductController
 );

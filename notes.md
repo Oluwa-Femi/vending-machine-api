@@ -4,3 +4,5 @@ test
 swagger
 docs
 duplicated session bug
+Get all products
+pagenation

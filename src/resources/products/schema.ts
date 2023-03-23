@@ -24,7 +24,7 @@ const params = {
 
 const ext_params = {
   body: object({
-    amountOfProduct: number({
+    unitOfProductToBeBought: number({
       required_error: "Amount of product is required",
     }).gt(0),
   }),

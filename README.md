@@ -3,9 +3,6 @@
 ## BRIEF
 Design a fully functional REST API for a vending machine, allowing users with a “seller” role to add, update or remove products, while users with a “buyer” role can deposit coins into the machine and make purchases
 
-## Deployment Link
-- 
-
 ## Repository Link
 - `https://github.com/Oluwa-Femi/vending-machine-api`
 
@@ -29,6 +26,7 @@ In the terminal, you can:
 * `cd` into your preferred folder
 * run git clone `https://github.com/Oluwa-Femi/vending-machine-api`
 * cd `vending-machine-api`
+* ensure mongodb is running on your local machine
 * create a `.env` file in the root directory replicating the keys in the `sample.env` file. Attach values to the keys or just dump the sample file in the `.env`. 
 * run `npm install` - to set up Node modules and install packages
 * run `npm run dev` - to spin the application

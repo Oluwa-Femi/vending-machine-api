@@ -214,7 +214,7 @@ export async function buyProductController(
         400
       );
     }
-    if (!(product.amountAvailable >= req.body?.amountOfProduct)) {
+    if (!(product.amountAvailable >= req.body?.unitOfProductToBeBought)) {
       return handleResponse(
         req,
         res,
@@ -222,7 +222,7 @@ export async function buyProductController(
         400
       );
     }
-    const totalCost: any = product.cost * req.body?.amountOfProduct;
+    const totalCost: any = product.cost * req.body?.unitOfProductToBeBought;
     if (!(user.deposit >= totalCost)) {
       return handleResponse(
         req,
@@ -243,7 +243,7 @@ export async function buyProductController(
       }
     );
     const amountAvail: any =
-      product.amountAvailable - req.body?.amountOfProduct;
+      product.amountAvailable - req.body?.unitOfProductToBeBought;
     await findAndUpdateProduct(
       { productId },
       { amountAvailable: amountAvail },

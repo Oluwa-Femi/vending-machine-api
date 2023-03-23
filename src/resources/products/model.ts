@@ -22,7 +22,7 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      default: () => `product_${uniqueCode()}`,
+      default: () => `${uniqueCode()}`,
     },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     productName: { type: String, required: true },

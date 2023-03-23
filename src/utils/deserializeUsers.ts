@@ -2,7 +2,6 @@ import { get } from "lodash";
 import { Request, Response, NextFunction } from "express";
 import { verifyToken } from "./jwt";
 import { reIssueAccessToken } from "../resources/sessions/service";
-import { any } from "zod";
 
 const deserializeUser = async (
   req: Request,

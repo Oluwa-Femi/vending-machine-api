@@ -100,34 +100,22 @@ export async function depositController(
   }
 }
 
-export async function resetDepositController(req: Request, res: Response) {
-  try {
-    const userId = res.locals.user._id;
-    const updatedData = await findAndUpdateUser(
-      { userId },
-      { deposit: 0 },
-      {
-        new: true,
-      }
-    );
-    //   return res.send(updatedUser);
-    return handleResponse(
-      req,
-      res,
-      {
-        status: "success",
-        message: Messages.SUCCESS,
-        data: updatedData,
-      },
-      200
-    );
-  } catch (error: any) {
-    console.log(error);
-    return handleResponse(
-      req,
-      res,
-      { status: "error", message: Messages.STATUS400 },
-      400
-    );
-  }
+export async function resetDepositController(
+  _: Request,
+  res: Response
+) {
+  const userId = res.locals.user._id;
+  const updatedUser = await findAndUpdateUser({_id:userId}, { deposit: 0 }, {
+    new: true,
+  });
+  return handleResponse(
+    _,
+    res,
+    {
+      status: "success",
+      message: Messages.SUCCESS,
+      data: updatedUser,
+    },
+    200
+  );
 }

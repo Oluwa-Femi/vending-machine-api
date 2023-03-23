@@ -20,6 +20,6 @@ router.post(
   depositController
 );
 router.get("/reset-deposit", isBuyer, resetDepositController);
-router.get("/users/logout/all", isUser, deleteAllSessionController);
+router.get("/logout/all", isUser, deleteAllSessionController);
 
 export default router;
