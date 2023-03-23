@@ -9,12 +9,12 @@ import {
   updateProductController,
 } from "./controller";
 import {
-    buyProductSchema,
-    createProductSchema,
-    deleteProductSchema,
-    getProductSchema,
-    updateProductSchema,
-  } from "./schema";
+  buyProductSchema,
+  createProductSchema,
+  deleteProductSchema,
+  getProductSchema,
+  updateProductSchema,
+} from "./schema";
 
 const router = Router();
 

@@ -2,6 +2,12 @@ import express from "express";
 import client from "prom-client";
 import log from "../utils/logger";
 
+import dotenv from "dotenv"
+
+dotenv.config();
+
+const metricPort = process.env.metricPort
+
 const app = express();
 
 export const restResponseTime = new client.Histogram({
@@ -27,7 +33,7 @@ export function startMetricsServer() {
     return res.send(await client.register.metrics());
   });
 
-  app.listen(9100, () => {
-    log.info("Metrics server started at http://localhost:9100");
+  app.listen(metricPort, () => {
+    log.info(`Metrics server started at http://localhost:${metricPort}`);
   });
 }

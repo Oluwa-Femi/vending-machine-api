@@ -1,3 +1,5 @@
+// I created this function to return change in the multiple of the coins
+
 export function bureauDeChange(money:any, denom:any){
     if (denom[0] < denom[1]) denom.reverse();
     const change:any = {};

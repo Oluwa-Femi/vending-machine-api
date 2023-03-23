@@ -1,6 +1,7 @@
 import { object, string, TypeOf, z, number } from "zod";
 import { COINVALUES } from "../../services/coins";
 
+// Validate user inputs
 export const userValidator = object({
   body: object({
     username: string({
@@ -19,18 +20,19 @@ export const userValidator = object({
   }),
 });
 
+// Validate Deposit input against coin values
 export const UserDepositSchema = object({
-    body: object({
-      depositAmount: number().int().gte(0).lte(100)
-    }).superRefine((val, ctx) => {
-      if (COINVALUES.indexOf(val.depositAmount) === -1) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: `Deposit amount must be in multiples of ${COINVALUES.toString()}`,
-        })
-      }
-    })
-  });
+  body: object({
+    depositAmount: number().int().gte(0).lte(100),
+  }).superRefine((val, ctx) => {
+    if (COINVALUES.indexOf(val.depositAmount) === -1) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `Deposit amount must be in multiples of ${COINVALUES.toString()}`,
+      });
+    }
+  }),
+});
 
 export type CreateUserInput = Omit<
   TypeOf<typeof userValidator>,

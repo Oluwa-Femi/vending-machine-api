@@ -2,8 +2,9 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import config from "config";
 
-const  passwordSalt = config.get<number>("passwordSalt")
+const numRound = config.get<number>("passwordSalt");
 
+// Set interfaces
 export interface UserInput {
   username: string;
   role: string;
@@ -17,6 +18,7 @@ export interface UserDocument extends UserInput, mongoose.Document {
   comparePassword(clientPassword: string): Promise<Boolean>;
 }
 
+// Define User types and user payload
 const userSchema = new mongoose.Schema(
   {
     username: { type: String, required: true, unique: true },
@@ -29,28 +31,23 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// Def User Document
+// User data encryption
 userSchema.pre("save", async function (next) {
   let user = this as unknown as UserDocument;
-
   if (!user.isModified("password")) {
     return next();
   }
-
-  const salt = await bcrypt.genSalt(passwordSalt);
-
+  const salt = await bcrypt.genSalt(Number(numRound));
   const hash = await bcrypt.hashSync(user.password, salt);
-
   user.password = hash;
-
   return next();
 });
 
+//Password confirmation
 userSchema.methods.comparePassword = async function (
   clientPassword: string
 ): Promise<boolean> {
   const user = this as UserDocument;
-
   return bcrypt.compare(clientPassword, user.password).catch((e) => false);
 };
 

@@ -4,7 +4,7 @@ export enum RequestType {
 
 export enum Messages {
     GENERIC = "Generic Error: Forbidden",
-    STATUS400 = "",
+    STATUS400 = "An error occured, please contact support",
     SUCCESS = "Successful",
     NOTUSER = "Forbidden, must be a user",
     NOTBUYER = "User is not a buyer, only buyers can buy products",

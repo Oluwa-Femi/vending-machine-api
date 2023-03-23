@@ -1,8 +1,5 @@
 import { FilterQuery, QueryOptions, UpdateQuery } from "mongoose";
-import ProductModel, {
-  ProductDocument,
-  ProductInput,
-} from "./model";
+import ProductModel, { ProductDocument, ProductInput } from "./model";
 import { dbResponseTime } from "../../helpers/timer";
 
 export async function createProduct(input: ProductInput) {

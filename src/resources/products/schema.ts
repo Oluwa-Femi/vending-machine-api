@@ -25,10 +25,10 @@ const params = {
 const ext_params = {
   body: object({
     amountOfProduct: number({
-      required_error: "Amount of product is required"
-    }).gt(0)
-  })
-}
+      required_error: "Amount of product is required",
+    }).gt(0),
+  }),
+};
 export const createProductSchema = object({
   ...payload,
 });
@@ -48,7 +48,7 @@ export const getProductSchema = object({
 
 export const buyProductSchema = object({
   ...params,
-  ...ext_params
+  ...ext_params,
 });
 
 export type CreateProductInput = TypeOf<typeof createProductSchema>;
