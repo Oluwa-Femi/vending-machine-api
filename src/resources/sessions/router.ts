@@ -11,11 +11,11 @@ import { isUser } from "../users/middleware";
 const router = Router();
 
 router.post(
-  "/sessions",
+  "/",
   [appValidator(sessionValidator)],
   createSessionController
 );
-router.get("/sessions", isUser, getSessionController);
-router.delete("/sessions", isUser, deleteSessionController);
+router.get("/", isUser, getSessionController);
+router.delete("/", isUser, deleteSessionController);
 
 export default router;

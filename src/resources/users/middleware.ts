@@ -3,7 +3,9 @@ import handleResponse from "../../helpers/response";
 import { Messages } from "../../helpers/types/enum";
 
 export const isUser = (req: Request, res: Response, next: NextFunction) => {
+  console.log("whereeeeeeveeerrrrr")
   const user = res.locals.user;
+  console.log(user, "useeerrrrrrr")
   if (!user) {
     return handleResponse(
       req,

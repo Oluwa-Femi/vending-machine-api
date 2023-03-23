@@ -25,6 +25,12 @@ export async function createSessionController(req: Request, res: Response) {
     const sessions = await findSessions({ user: user._id, valid: true });
     let warnSession = {};
     if (sessions.length > 0) {
+        // return handleResponse(
+        //     req,
+        //     res,
+        //     { status: "error", message: Messages.DUPLICATEDSESSION },
+        //     400
+        //   );
       warnSession = { note: Messages.DUPLICATEDSESSION };
     }
     const session = await createSession(user._id, req.get("user-agent") || "");
@@ -61,9 +67,9 @@ export async function createSessionController(req: Request, res: Response) {
 
 export async function getSessionController(req: Request, res: Response) {
   try {
+    console.log("hit meeeeeeeeee")
     const userId = res.locals.user._id;
     const sessions = await findSessions({ user: userId, valid: true });
-    //   return res.send(sessions);
     return handleResponse(
       req,
       res,
