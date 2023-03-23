@@ -7,6 +7,7 @@ import {
   deleteProductController,
   getProductController,
   updateProductController,
+  getAllProductsController
 } from "./controller";
 import {
   buyProductSchema,
@@ -29,6 +30,12 @@ router.put(
   [isUser, appValidator(updateProductSchema)],
   updateProductController
 );
+
+router.get(
+  "/all",
+  getAllProductsController
+);
+
 
 router.get(
   "/:productId",

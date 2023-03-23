@@ -1,7 +1,6 @@
 import { object, string, TypeOf, z, number } from "zod";
 import { COINVALUES } from "../../services/coins";
 
-// Validate user inputs
 export const userValidator = object({
   body: object({
     username: string({

@@ -4,7 +4,6 @@ import config from "config";
 
 const numRound = config.get<number>("passwordSalt");
 
-// Set interfaces
 export interface UserInput {
   username: string;
   role: string;
@@ -31,7 +30,6 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// User data encryption
 userSchema.pre("save", async function (next) {
   let user = this as unknown as UserDocument;
   if (!user.isModified("password")) {

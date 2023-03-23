@@ -94,7 +94,6 @@ export async function deleteSessionController(req: Request, res: Response) {
   try {
     const sessionId = res.locals.user.session;
     await updateSession({ _id: sessionId }, { valid: false });
-    //   return res.send();
     return handleResponse(
       req,
       res,

@@ -40,7 +40,6 @@ export async function getUserController(req: Request, res: Response) {
   try {
     const userId = res.locals.user._id;
     const user = await findUser({ _id: userId });
-    //   return res.send();
     const data = omit({ ...user }, ["password", "_id"]);
     return handleResponse(
       req,
@@ -78,7 +77,6 @@ export async function depositController(
       }
     );
     const data = omit(updatedUser?.toJSON(), ["password", "_id"]);
-    // return res.send({ ..._, message: "Deposit successful" });
     return handleResponse(
       req,
       res,

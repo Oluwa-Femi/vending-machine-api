@@ -13,8 +13,10 @@ import {
   deleteProduct,
   findAndUpdateProduct,
   findProduct,
+  findAllProducts
 } from "./service";
 import { findAndUpdateUser, findUser } from "../users/service";
+import ProductModel from "./model";
 
 export async function createProductController(
   req: Request<{}, {}, CreateProductInput["body"]>,
@@ -24,7 +26,6 @@ export async function createProductController(
     const sellerId = res.locals.user._id;
     const body = req.body;
     const product = await createProduct({ ...body, user: sellerId });
-    // return res.send(product);
     return handleResponse(
       req,
       res,
@@ -75,7 +76,6 @@ export async function updateProductController(
     const updatedProduct = await findAndUpdateProduct({ productId }, update, {
       new: true,
     });
-    // return res.send(updatedProduct);
     return handleResponse(
       req,
       res,
@@ -112,7 +112,6 @@ export async function getProductController(
         400
       );
     }
-    // return res.send(product);
     return handleResponse(
       req,
       res,
@@ -159,8 +158,6 @@ export async function deleteProductController(
       );
     }
     await deleteProduct({ productId });
-
-    // return res.send(Messages.SUCCESS);
     return handleResponse(
       req,
       res,
@@ -266,5 +263,31 @@ export async function buyProductController(
       },
       200
     );
+  }
+}
+
+export async function getAllProductsController(
+  req: Request<UpdateProductInput["params"]>,
+  res: Response
+) {
+  const { page = 1, limit = 10 } = req.query;
+  try {
+    const products = await findAllProducts(ProductModel, page, limit);
+    const count = await ProductModel.countDocuments();
+    return res.json({
+      status: 200,
+      message: "success",
+      totalPages: Math.ceil(count / Number(limit)),
+      currentPage: Number(page),
+      totalProducts: count,
+      data: products,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({
+        status: "error",
+        message: "Cannot get products at this time",
+      });
   }
 }

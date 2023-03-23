@@ -18,6 +18,15 @@ export async function createProduct(input: ProductInput) {
   }
 }
 
+export const findAllProducts = async (Model:any, page:any, limit:any) => {
+    const docs = await Model.find()
+      .limit(limit * 1)
+      .skip((Number(page) - 1) * limit)
+      .then((result: any) => result)
+      .catch((error: any) => error);
+    return docs;
+  };
+
 export async function findProduct(
   query: FilterQuery<ProductDocument>,
   options: QueryOptions = { lean: true }
