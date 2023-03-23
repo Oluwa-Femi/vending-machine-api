@@ -14,7 +14,7 @@ export enum Messages {
     NOTPRODUCT = "Product Not Found",
     LOGGEDOUT = "User is Logged Out",
     WALLETNOTFUNDED = "Please fund your wallet, it's currently empty",
-    DUPLICATEDSESSION = "There is already an active session using your account",
+    DUPLICATEDSESSION = "There is already an active session using this account, please logout any other current session",
     STATUS500 = "An error occured. Please try again or contact support",
     SESSIONEXPIRED = "Unauthorized. Session timeout",
     INVALIDTOKEN = "An error occurred. Invalid token format",

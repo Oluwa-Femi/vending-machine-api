@@ -23,7 +23,7 @@ export async function createSessionController(req: Request, res: Response) {
       );
     }
     const sessions = await findSessions({ user: user._id, valid: true });
-    let warnSession = {};
+    let sessionPrompt = {};
     if (sessions.length > 0) {
         // return handleResponse(
         //     req,
@@ -31,7 +31,7 @@ export async function createSessionController(req: Request, res: Response) {
         //     { status: "error", message: Messages.DUPLICATEDSESSION },
         //     400
         //   );
-      warnSession = { note: Messages.DUPLICATEDSESSION };
+      sessionPrompt = { note: Messages.DUPLICATEDSESSION };
     }
     const session = await createSession(user._id, req.get("user-agent") || "");
     const accessToken = signToken(
@@ -50,7 +50,7 @@ export async function createSessionController(req: Request, res: Response) {
       {
         status: "success",
         message: Messages.SUCCESS,
-        data: { ...warnSession, accessToken, refreshToken },
+        data: { ...sessionPrompt, accessToken, refreshToken },
       },
       200
     );
@@ -127,7 +127,6 @@ export async function deleteAllSessionController(req: Request, res: Response) {
     sessions.map(async (session) => {
       await updateSession({ _id: session._id }, { valid: false });
     });
-    //   res.send(Messages.LOGGEDOUT);
     return handleResponse(
       req,
       res,
