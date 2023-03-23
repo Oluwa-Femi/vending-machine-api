@@ -1,13 +1,25 @@
-import { Router, Request, Response } from "express";
-import { createUserController, getUserController } from "./controller";
+import { Router } from "express";
+import {
+  createUserController,
+  getUserController,
+  resetDepositController,
+  depositController,
+} from "./controller";
 import appValidator from "../../helpers/appValidator";
-import { userValidator } from "./schema";
-import isUser from "./middleware";
+import { userValidator, UserDepositSchema } from "./schema";
+import { isUser, isBuyer } from "./middleware";
+import { deleteAllSessionController } from "../sessions/controller";
 
 const router = Router();
 
-router.get("/healthcheck", (req:Request, res:Response) => res.sendStatus(200));
-router.post("/users", appValidator(userValidator), createUserController);
-router.get("/users/profile", isUser, getUserController);
+router.post("/create", appValidator(userValidator), createUserController);
+router.get("/profile", isUser, getUserController);
+router.post(
+  "/deposit",
+  [appValidator(UserDepositSchema), isUser],
+  depositController
+);
+router.get("/reset-deposit", isBuyer, resetDepositController);
+router.get("/logout/all", isUser, deleteAllSessionController);
 
 export default router;
