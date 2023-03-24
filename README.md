@@ -15,11 +15,8 @@ Design a fully functional REST API for a vending machine, allowing users with a 
 - Express
 - File format - JSON
 
-## Project Structure
-
 ## Documentation
-Postman -
-Swagger - 
+Postman - `https://documenter.getpostman.com/view/8706343/2s93RMWvsZ`
 
 ## Instructions - Local set-up
 In the terminal, you can:
@@ -31,8 +28,6 @@ In the terminal, you can:
 * run `npm install` - to set up Node modules and install packages
 * run `npm run dev` - to spin the application
 * use an API tester e.g Postman to run the routes
-
-## Instructions - Deployed Link
 
 ## Test
 - Ensure you are in the `vending-machine-api` folder
@@ -52,8 +47,8 @@ In the terminal, you can:
 - [*] Implement /buy endpoint (accepts productId, amount of products) so users with a “buyer” role can buy a product (shouldn't be able to buy multiple different products at the same time) with the money they’ve deposited. API should return total they’ve spent, the product they’ve purchased and their change if there’s any (in an array of 5, 10, 20, 50 and 100 cent coins)
 - [*] Implement /reset endpoint so users with a “buyer” role can reset their deposit back to 0
 - [ ] Take time to think about possible edge cases and access issues that should be solved
-- [ ] Write tests
-- [ ] Clean up, keep all environment variables in env, make sure variable and function names are descriptive,
+- [*] Write tests
+- [*] Clean up, keep all environment variables in env, make sure variable and function names are descriptive,
 
 ## Stretch Goals
 - [x] Set up an audit trail system with logger
