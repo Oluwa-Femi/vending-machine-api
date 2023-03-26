@@ -38,7 +38,7 @@ In the terminal, you can:
 - [x] Set up repo
 - [x] Initialize
 - [x] REST API should be implemented consuming and producing “application/json”
-- [ ] Implement product model with amountAvailable, cost (should be in multiples of 5), productName and sellerId fields
+- [x] Implement product model with amountAvailable, cost (should be in multiples of 5), productName and sellerId fields
 - [x] Implement user model with username, password, deposit and role fields
 - [x] Implement an authentication method (basic, oAuth, JWT or something else, the choice is yours)
 - [x] All of the endpoints should be authenticated unless stated otherwise
