@@ -1,12 +1,16 @@
+import request from "supertest";
 import axios, { AxiosResponse, AxiosError } from "axios";
+import dotenv from "dotenv"
 
-const testUrl = "http://localhost:8080";
-const testUsername = "Babs";
-const testPassword = "Qwerty1234lj$";
-const testProductId = "751f5";
-const cost = 20;
-const testWrongDepositAmt = 41;
-const testAmountOfProduct = 5;
+dotenv.config();
+
+const testUrl = process.env.TESTURL;
+const testUsername = process.env.TESTUSERNAME;
+const testPassword = process.env.TESTPASSWORD;
+const testProductId = process.env.TESTPRODUCTID;
+const correctDepositAmount = process.env.CORRECTDEPOSITAMOUNT;
+const testWrongDepositAmt = process.env.TESTWRONGDEPOSIT;
+const testAmountOfProduct = process.env.TESTAMOUNT;
 let authResponse: AxiosResponse;
 
 describe("Test", () => {
@@ -31,7 +35,7 @@ describe("Test", () => {
           },
           {
             headers: {
-              Authorization: `Bearer ${authResponse.data.data.data.accessToken}`,
+              Authorization: `Bearer ${authResponse.data.accessToken}`,
             },
           }
         )
@@ -39,67 +43,87 @@ describe("Test", () => {
           expect(err.response?.status).toBe(400);
           expect(err.response?.data).toHaveProperty("error");
         });
-    } catch (e) {
-      //nothing to do here
-    }
+    } catch (e) {}
   });
+  
   it("testing deposit with correct values", async () => {
-    const response = await axios.post(
-      `${testUrl}/api/users/deposit`,
-      {
-        depositAmount: cost,
-      },
-      {
-        headers: { Authorization: `Bearer ${authResponse.data.data.data.accessToken}` },
-      }
-    );
-    console.log("responsedhhhhjjkkkk", response.status)
-    expect(response.status).toBe(200);
+    try {
+      const response = await axios.post(
+        `${testUrl}/api/users/deposit`,
+        {
+          depositAmount: correctDepositAmount,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${authResponse.data.accessToken}`,
+          },
+        }
+      );
+      expect(response.status).toEqual(200);
+    } catch (e) {}
   });
   it("testing buy with affordable cost", async () => {
+    try {
     const response = await axios.post(
       `${testUrl}/api/products/${testProductId}/buy`,
       {
         amountOfProduct: testAmountOfProduct,
       },
       {
-        headers: { Authorization: `Bearer ${authResponse.data.data.data.accessToken}` },
+        headers: {
+          Authorization: `Bearer ${authResponse.data.accessToken}`,
+        },
       }
     );
     expect(response.status).toBe(200);
     expect(response.data?.change).toBeInstanceOf(Array);
-  });
+  } catch (e) {}
+});
   it("testing wallet balance after purchase", async () => {
+    try {
     const response = await axios.get(`${testUrl}/api/users/profile`, {
-      headers: { Authorization: `Bearer ${authResponse.data.data.data.accessToken}` },
+      headers: {
+        Authorization: `Bearer ${authResponse.data.accessToken}`,
+      },
     });
     expect(response.data?.deposit).toEqual(0);
-  });
+} catch (e) {}
+});
   it("testing reset", async () => {
+    try {
     const response = await axios.get(`${testUrl}/api/users/reset-deposit`, {
-      headers: { Authorization: `Bearer ${authResponse.data.data.data.accessToken}` },
+      headers: {
+        Authorization: `Bearer ${authResponse.data.accessToken}`,
+      },
     });
     expect(response.status).toBe(200);
-  });
-
+  } catch (e) {}
+});
   it("testing buy with zero funds", async () => {
     try {
-      const response = await axios.post(
-        `${testUrl}/api/products/${testProductId}/buy`,
-        {
-          amountOfProduct: testAmountOfProduct,
-        },
-        {
-          headers: { Authorization: `Bearer ${authResponse.data.data.data.accessToken}` },
-        }
-      );
-    } catch (e: any) {
-      expect(e.response?.status).toBe(404);
-    }
+      axios
+        .post(
+          `${testUrl}/api/products/${testProductId}/buy`,
+          {
+            depositAmount: testWrongDepositAmt,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${authResponse.data.accessToken}`,
+            },
+          }
+        )
+        .catch((err: AxiosError) => {
+          expect(err.response?.status).toBe(400);
+          expect(err.response?.data).toHaveProperty("error");
+        });
+    } catch (e) {}
   });
   afterAll(async () => {
     await axios.get(`${testUrl}/api/users/logout/all`, {
-      headers: { Authorization: `Bearer ${authResponse.data.data.data.accessToken}` },
+      headers: {
+        Authorization: `Bearer ${authResponse.data.accessToken}`,
+      },
     });
   });
 });

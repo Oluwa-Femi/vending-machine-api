@@ -31,6 +31,7 @@ In the terminal, you can:
 
 ## Test
 - Ensure you are in the `vending-machine-api` folder
+- Run `npm run dev` to spin up local
 - Run `npm run test` in the terminal
 
 ## MVP
@@ -46,7 +47,7 @@ In the terminal, you can:
 - [x] Implement /deposit endpoint so users with a “buyer” role can deposit only 5, 10, 20, 50 and 100 cent coins into their vending machine account (one coin at the time)
 - [x] Implement /buy endpoint (accepts productId, amount of products) so users with a “buyer” role can buy a product (shouldn't be able to buy multiple different products at the same time) with the money they’ve deposited. API should return total they’ve spent, the product they’ve purchased and their change if there’s any (in an array of 5, 10, 20, 50 and 100 cent coins)
 - [x] Implement /reset endpoint so users with a “buyer” role can reset their deposit back to 0
-- [ ] Take time to think about possible edge cases and access issues that should be solved
+- [x] Take time to think about possible edge cases and access issues that should be solved
 - [x] Write tests
 - [x] Clean up, keep all environment variables in env, make sure variable and function names are descriptive,
 
